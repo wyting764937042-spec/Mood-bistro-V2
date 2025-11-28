@@ -1,4 +1,4 @@
-import { GoogleGenAI, Type, Schema } from "@google/genai";
+import { GoogleGenAI, Type, Schema, Content } from "@google/genai";
 import { Cocktail } from "../types";
 
 // Initialize Gemini Client
@@ -83,7 +83,7 @@ const COCKTAIL_SCHEMA: Schema = {
   required: ["name", "recipe", "visual", "visualStructure", "taste", "whisper", "music", "imageKeyword"],
 };
 
-export const chatWithBaron = async (message: string, history: { role: string; parts: [{ text: string }] }[]) => {
+export const chatWithBaron = async (message: string, history: Content[]) => {
   try {
     const model = "gemini-2.5-flash";
     const chat = ai.chats.create({

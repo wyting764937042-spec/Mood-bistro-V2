@@ -125,10 +125,12 @@ const App: React.FC = () => {
     setMessages(prev => [...prev, userMsg]);
 
     try {
-      const history = messages.map(m => ({
-        role: m.role,
-        parts: [{ text: m.content }]
-      }));
+      const history = messages
+        .filter(m => m.content && m.content.trim() !== '')
+        .map(m => ({
+          role: m.role,
+          parts: [{ text: m.content }]
+        }));
       history.push({ role: 'user', parts: [{ text: userContent }] });
 
       const replyText = await chatWithBaron(userContent, history);
